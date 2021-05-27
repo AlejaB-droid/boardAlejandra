@@ -26,4 +26,26 @@ router.get("/taskList", Auth, async(req, res) => {
     return res.status(200).send({board})
 });
 
+router.put("/updateTask", Auth, async(req, res) => {
+    const user = await User.findById(req.user._id);
+    if(!user) return res.status(400).send("The user does not exist on DB");
+
+    const board = await Board.findByIdAndUpdate(req.body._id,{
+        userId: user._id,
+        name: req.body.name,
+        status: req.body.status,
+        description: req.body.description
+    });
+    if(!board) res.status(400).send("Couldn't edit activity");
+    return res.status(200).send({board});
+});
+
+router.delete("/:_id", Auth, async(req, res) => {
+    const user = await User.findById(req.user._id);
+    if(!user) return res.status(400).send("The user does not exist on DB");
+
+    const board = await Board.findByIdAndDelete(req.params._id);
+    if (!board) return res.status(401).send("The task does not exist");
+    return res.status(200).send("Task deleted");
+})
 module.exports = router;
