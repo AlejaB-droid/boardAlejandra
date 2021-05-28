@@ -6,9 +6,7 @@ const User = require("../models/user");
 const Board = require("../models/board");
 
 router.post("/newTask", Auth, async(req, res) => {
-    const user = await User.findById(req.user._id);
-    if(!user) return res.status(400).semd("User not authenticated");
-
+    const user = await validate(req);
     const board = new Board({
         userId: user._id,
         name: req.body.name,
@@ -20,16 +18,13 @@ router.post("/newTask", Auth, async(req, res) => {
 });
 
 router.get("/taskList", Auth, async(req, res) => {
-    const user = await User.findById(req.user._id);
-    if(!user) return res.status(400).send("The user does not exist on DB");
+    const user = await validate(req);
     const board = await Board.find({userId: user._id});
     return res.status(200).send({board})
 });
 
 router.put("/updateTask", Auth, async(req, res) => {
-    const user = await User.findById(req.user._id);
-    if(!user) return res.status(400).send("The user does not exist on DB");
-
+    const user = await validate(req);
     const board = await Board.findByIdAndUpdate(req.body._id,{
         userId: user._id,
         name: req.body.name,
@@ -41,11 +36,16 @@ router.put("/updateTask", Auth, async(req, res) => {
 });
 
 router.delete("/:_id", Auth, async(req, res) => {
-    const user = await User.findById(req.user._id);
-    if(!user) return res.status(400).send("The user does not exist on DB");
-
+    await validate(req);
     const board = await Board.findByIdAndDelete(req.params._id);
     if (!board) return res.status(401).send("The task does not exist");
     return res.status(200).send("Task deleted");
-})
+});
+
+const validate = (req) => {
+    const user = User.findById(req.user._id);
+    if(!user) return res.status(400).send("User not authenticated");
+    return user;
+};
+
 module.exports = router;
