@@ -6,7 +6,7 @@ const auth = (req, res, next) => {
     jwtTk = jwtTk.split(" ")[1];
     message(jwtTk);
     try {
-        const payload = jwt.verify(jwtTk, "secret");
+        const payload = jwt.verify(jwtTk, process.env.secretKey);
         req.user = payload;
         next();
     } catch (error) {

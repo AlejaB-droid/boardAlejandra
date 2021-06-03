@@ -1,9 +1,20 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const Auth = require("../middleware/auth");
-const User = require("../models/user");
+const UserAuth = require("../middleware/user");
+const Upload = require("../middleware/file");
 const Board = require("../models/board");
+
+
+router.post("/newTaskImg", Upload.single("image"), UserAuth, Auth, async(req, res) => {
+    if(!req.body.name || !req.body.description){return res. status(400).send("Please fill all the blanks")}
+    let img = req.file;
+    if(img){
+        if(img.mimetype !== "image/jpg" && img.mimetype !== "image/jpeg")
+    }
+});
 
 router.post("/newTask", Auth, async(req, res) => {
     const user = await validate(req);
@@ -42,10 +53,5 @@ router.delete("/:_id", Auth, async(req, res) => {
     return res.status(200).send("Task deleted");
 });
 
-const validate = (req) => {
-    const user = User.findById(req.user._id);
-    if(!user) return res.status(400).send("User not authenticated");
-    return user;
-};
 
 module.exports = router;
