@@ -8,46 +8,86 @@ const Upload = require("../middleware/file");
 const Board = require("../models/board");
 
 
-router.post("/newTaskImg", Upload.single("image"), UserAuth, Auth, async(req, res) => {
+router.post("/newTask", Upload.single("image"), UserAuth, Auth, async(req, res) => {
     if(!req.body.name || !req.body.description){return res. status(400).send("Please fill all the blanks")}
     let img = req.file;
     if(img){
-        if(img.mimetype !== "image/jpg" && img.mimetype !== "image/jpeg")
+        if(img.mimetype !== "image/jpg" && img.mimetype !== "image/jpeg" && img.mimetype !== "image/png" && img.mimetype !== "image/gif"){
+            return res.status(400).send("Invalid format file")
+        }
     }
-});
 
-router.post("/newTask", Auth, async(req, res) => {
-    const user = await validate(req);
+    const url = req.protocol + "://" + req.get("host");
+    let image = "";
+    if(req.file !== undefined && req.file.filename){
+        image = url + "/uploads" + req.file.filename;
+    }
+
     const board = new Board({
-        userId: user._id,
+        userId: req.user._id,
         name: req.body.name,
         description: req.body.description,
-        status: "to-do"
+        status: "to-do",
+        image: image
     });
+
     const result = await board.save();
-    return res.status(200).send({result});
+    if(!result){
+        return res.status(400).send("Failed to upload task");
+    }else{
+        return res.status(200).send({result});
+    }
+    
 });
 
-router.get("/taskList", Auth, async(req, res) => {
-    const user = await validate(req);
+// router.post("/newTask", Auth, async(req, res) => {
+//     const user = await validate(req);
+//     const board = new Board({
+//         userId: user._id,
+//         name: req.body.name,
+//         description: req.body.description,
+//         status: "to-do"
+//     });
+//     const result = await board.save();
+//     return res.status(200).send({result});
+// });
+
+router.get("/taskList", Auth, UserAuth, async(req, res) => {
+    const id = mongoose.Types.ObjectId.isValid(req.user._id);
+    if(!id) {return res.status(400).send("Invalid id")};
+
     const board = await Board.find({userId: user._id});
+    if(!board) {
+        return res.status(400).send("There are no tasks to delete");
+    }else{
     return res.status(200).send({board})
+    };
 });
 
-router.put("/updateTask", Auth, async(req, res) => {
-    const user = await validate(req);
+router.put("/updateTask", Auth, UserAuth, async(req, res) => {
+    let blanks = req.body;
+    if(!blanks._id || !blanks.name || !blanks.status || !blanks.description){
+        return res.status(400).send("Incomplete data")
+    };
+
+    const id = mongoose.Types.ObjectId.isValid(req.body._id);
+    if(!id){return rex.status(400).send("Invalid id")};
+
     const board = await Board.findByIdAndUpdate(req.body._id,{
         userId: user._id,
         name: req.body.name,
         status: req.body.status,
         description: req.body.description
     });
-    if(!board) res.status(400).send("Couldn't edit activity");
+
+    if(!board) {res.status(400).send("Couldn't edit activity")};
     return res.status(200).send({board});
 });
 
-router.delete("/:_id", Auth, async(req, res) => {
-    await validate(req);
+router.delete("/deleteTask/:_id", Auth, UserAuth, async(req, res) => {
+    const id = mongoose.Types.ObjectId.isValid(req.params._id);
+    if(!id) {return res.status(400).send("Invalid id")};
+    
     const board = await Board.findByIdAndDelete(req.params._id);
     if (!board) return res.status(401).send("The task does not exist");
     return res.status(200).send("Task deleted");
