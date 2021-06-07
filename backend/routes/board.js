@@ -1,6 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const multipart = require("connect-multiparty");
+const mult = multipart();
+const fs = require("fs");
+const path = require("path");
+const moment = require("moment");
 
 const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
@@ -8,19 +13,14 @@ const Upload = require("../middleware/file");
 const Board = require("../models/board");
 
 
-router.post("/newTask", Upload.single("image"), UserAuth, Auth, async(req, res) => {
+router.post("/newTask", mult, Upload, UserAuth, Auth, async(req, res) => {
     if(!req.body.name || !req.body.description){return res. status(400).send("Please fill all the blanks")}
-    let img = req.file;
-    if(img){
-        if(img.mimetype !== "image/jpg" && img.mimetype !== "image/jpeg" && img.mimetype !== "image/png" && img.mimetype !== "image/gif"){
-            return res.status(400).send("Invalid format file")
-        }
-    }
-
-    const url = req.protocol + "://" + req.get("host");
-    let image = "";
-    if(req.file !== undefined && req.file.filename){
-        image = url + "/uploads" + req.file.filename;
+    let img = "";
+    if(req.files !== undefines && req.files.image.type){
+        const url = req.protocol + "://" + req.get("host") + "/";
+        let serverImage = "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+        fs.createReadStream(req.files.image.path).pipe(fs.createWriteStream(serverImage));
+        img = url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
     }
 
     const board = new Board({
@@ -28,7 +28,7 @@ router.post("/newTask", Upload.single("image"), UserAuth, Auth, async(req, res) 
         name: req.body.name,
         description: req.body.description,
         status: "to-do",
-        image: image
+        image: img
     });
 
     const result = await board.save();

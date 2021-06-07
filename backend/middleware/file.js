@@ -1,28 +1,17 @@
-const multer = require("multer");
-const moment = require("moment");
-const path = require("path");
-const directory = "./uploads/";
-
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, directory);
-  },
-  filename: (req, file, cb) => {
-    filename = moment().unix() + path.extname(file.originalname);
-    cb(null, filename);
-  },
-});
-
-const upload = multer({
-  storage: storage,
-  fileFilter: (req, file, cb) => {
-    if (!req.body.name || !req.body.description) file = "";
-    if (file == "") {
-      return cb(null, false);
-    } else {
-      return cd(null, true);
-    }
-  },
-});
+const upload = (req, res, next) => {
+  if (req.files.type){
+    let type = req.files.image.type;
+    if(
+    type !== "image/jpg" &&
+    type !== "image/jpeg" &&
+    type !== "image/png" &&
+    type !== "image/gif"
+    ){
+      return res.status(400).send("Invalid format")
+    }else{
+      next()
+    };
+  };
+}; 
 
 module.exports = upload;

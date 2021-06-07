@@ -2,9 +2,9 @@ const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
     let jwtTk = req.header("Authorization");
-    message(jwtTk);
+    if(!jwtTk) return res.status(400).send("Rejected authorization: there is no token");
     jwtTk = jwtTk.split(" ")[1];
-    message(jwtTk);
+    if(!jwtTk) return res.status(400).send("Rejected authorization: there is no token");
     try {
         const payload = jwt.verify(jwtTk, process.env.secretKey);
         req.user = payload;
@@ -12,10 +12,6 @@ const auth = (req, res, next) => {
     } catch (error) {
         return res.status(400).send("Rejected authorization: invalid token");
     }
-};
-
-const message = (jwtTk) => {
-    if(!jwtTk) return res.status(400).send("Rejected authorization: there is no token");
 };
 
 module.exports = auth;

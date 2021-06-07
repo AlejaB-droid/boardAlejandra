@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const mongoose = require("mongoose");
 
 const User = require("../models/user");
-const Role = require("../models/user");
+const Role = require("../models/role");
 const Auth = require("../middleware/auth");
 const UserAuth = require("../middleware/user");
 const Admin = require("../middleware/admin");
@@ -24,6 +24,7 @@ router.post("/userRegistration", async (req, res) => {
   }
 
   const hash = await bcrypt.hash(req.body.password, 20);
+
   user = new User({
     name: req.body.name,
     email: req.body.email,
@@ -68,7 +69,7 @@ router.post("/adminRegistration", Auth, UserAuth, Admin, async (req, res) => {
     return res.status(400).send("The user already exists");
   }
 
-  const hast = await bcrypt.hash(req.body.password, 20);
+  const hash = await bcrypt.hash(req.body.password, 20);
 
   user = new User({
     name: req.body.name,
@@ -83,7 +84,6 @@ router.post("/adminRegistration", Auth, UserAuth, Admin, async (req, res) => {
     if (!result) {
       return res.status(401).send("Failed to register user");
     }
-
     const jwtTk = user.generateJWT();
     res.status(200).send({ jwtTk });
   } catch (error) {
@@ -93,24 +93,74 @@ router.post("/adminRegistration", Auth, UserAuth, Admin, async (req, res) => {
 
 router.put("/userUpdate", Auth, UserAuth, Admin, async (req, res) => {
   let blanks = req.body;
-  if (!blanks._id || !blanks.name || !blanks.email || !blanks.password || !blanks.roleId) {
+  if (
+    !blanks._id ||
+    !blanks.name ||
+    !blanks.email ||
+    !blanks.password ||
+    !blanks.roleId
+  ) {
     return res.status(400).send("Incomplete data");
-  };
+  }
 
   const hash = await bcrypt.hash(req.body.password, 20);
-  const user = await User.findByIdAndUpdate(req.body._id,{
+
+  const user = await User.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
     email: req.body.email,
     password: hash,
     roleId: role.body._id,
-    status: req.body.status
+    status: req.body.status,
   });
 
-  if (!user){
-    return res.status(401).send("COuldn't edit user")
-  }else{
-    return res.status(200).send({ user })
-  };
+  if (!user) {
+    return res.status(401).send("COuldn't edit user");
+  } else {
+    return res.status(200).send({ user });
+  }
+});
+
+router.delete("deleteUser/:id", Auth, UserAuth, Admin, async (req, res) => {
+  const id = mongoose.Types.ObjectId.isValid(req.params._id);
+  if (!id) {
+    return res.status(400).send("Invalid id");
+  }
+
+  const user = await User.findByIdAndDelete(req.params._id);
+  if (!user) {
+    return res.status(400).send("Couldn't delete user");
+  } else {
+    return res.status(200).send("The user has been deleted");
+  }
+});
+
+router.put("/deleteUser", Auth, UserAuth, Admin, async (req, res) => {
+  let blanks = req.body;
+  if (
+    !blanks._id ||
+    !blanks.name ||
+    !blanks.email ||
+    !blanks.password ||
+    !blanks.roleId
+  ) {
+    return res.status(400).send("Incomplete data");
+  }
+
+  const hash = await bcrypt.hash(req.body.password, 20);
+
+  user = new User({
+    name: req.body.name,
+    email: req.body.email,
+    password: hash,
+    roleId: req.body.roleId,
+    status: true,
+  });
+
+  if (!user) {
+    return res.status(400).send("Couldn't delete user");
+  } else {
+    return res.status(200).send("The user has been deleted");
+  }
 });
 
 module.exports = router;

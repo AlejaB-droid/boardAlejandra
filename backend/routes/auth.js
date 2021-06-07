@@ -6,19 +6,17 @@ const User = require("../models/user");
 
 router.post("/login", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
-  message(user);
+  if (!user) return res.status(400).send("Incorrect login info");
+
   const hash = await bcrypt.compare(req.body.password, user.password);
-  message(hash);
+  if (!user.status || !hash)
+    return res.status(400).send("Incorrect login info");
   try {
     const jwt = user.generateJWT();
     return res.status(200).send({ jwt });
   } catch (error) {
-    return res.status(400).send("Login error", error);
+    return res.status(400).send("Login error");
   }
 });
-
-const message = (info) => {
-  if (!info) return res.status(400).send("Invalid login info");
-};
 
 module.exports = router;
