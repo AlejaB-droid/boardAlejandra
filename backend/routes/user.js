@@ -109,7 +109,7 @@ router.put("/userUpdate", Auth, UserAuth, Admin, async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: hash,
-    roleId: role.body._id,
+    roleId: req.body._id,
     status: req.body.status,
   });
 

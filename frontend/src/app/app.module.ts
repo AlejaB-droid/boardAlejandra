@@ -18,7 +18,9 @@ import { AuthService } from "./services/auth.service";
 import { BoardService } from "./services/board.service";
 import { TokenInterceptorService } from "./services/token-interceptor.service";
 import { AuthGuard } from "./guard/auth.guard";
+
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -27,6 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -53,7 +56,10 @@ import { MatExpansionModule } from '@angular/material/expansion';
     MatInputModule,
     MatCardModule,
     MatIconModule,
-    MatExpansionModule
+    MatExpansionModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService, BoardService, AuthGuard, TokenInterceptorService],
   bootstrap: [AppComponent]

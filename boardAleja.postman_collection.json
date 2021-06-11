@@ -23,12 +23,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/userRegistration",
+							"raw": "http://localhost:3010/api/user/userRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -53,12 +53,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/userRegistration",
+							"raw": "http://localhost:3010/api/user/userRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -83,12 +83,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/userRegistration",
+							"raw": "http://localhost:3010/api/user/userRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -101,15 +101,25 @@
 				{
 					"name": "List all users",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMyOWJkZmY3ODNhMTIxYjQxMGM1MTYiLCJuYW1lIjoiTWFzdGVyIEFkbWluIiwiZW1haWwiOiJtYXN0ZXJAbWFpbC5jb20iLCJyb2xlSWQiOiI2MGJhZjc0NmQ0NzNjYzFkNjg4MmQwNmMiLCJpYXQiOjE2MjMzNjc0NDV9.shbA2ffLSPwbJXQpwyN3jtBGYUVyipKgERuInRgi8lE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/user/listUsers/",
+							"raw": "http://localhost:3010/api/user/listUsers/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -126,17 +136,17 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/user/listUsers/Pep",
+							"raw": "http://localhost:3010/api/user/listUsers/Ju",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
 								"listUsers",
-								"Pep"
+								"Ju"
 							]
 						}
 					},
@@ -162,12 +172,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/login",
+							"raw": "http://localhost:3010/api/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"auth",
@@ -192,12 +202,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/login",
+							"raw": "http://localhost:3010/api/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"auth",
@@ -222,12 +232,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/auth/login",
+							"raw": "http://localhost:3010/api/auth/login",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"auth",
@@ -257,12 +267,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/role/roleRegistration",
+							"raw": "http://localhost:3010/api/role/roleRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"role",
@@ -287,12 +297,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/role/roleRegistration",
+							"raw": "http://localhost:3010/api/role/roleRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"role",
@@ -308,12 +318,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/role/roleList",
+							"raw": "http://localhost:3010/api/role/roleList",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"role",
@@ -336,7 +346,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzAyNjAwOX0.NhsWEIZliam5KoACVYL4LognVtZS0TZkElIHtHxZnDw",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzM1ODYxM30.GL_L_YMLqmajMb-H4OLRk14u3ilV0TibBFM0g8VBfyg",
 									"type": "string"
 								}
 							]
@@ -344,24 +354,8 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "name",
-									"value": "poner imagenes",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "frontend",
-									"type": "text"
-								},
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/C:/Users/maria.a.barrios/OneDrive - Accenture/Pictures/modelo.png"
-								}
-							],
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"crear colecciones\",\r\n    \"description\": \"\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -369,12 +363,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/board/newTask",
+							"raw": "http://localhost:3010/api/board/newTask",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"board",
@@ -392,7 +386,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFmY2IyYmQ2OWQ1MDA1YTBiN2MwNDkiLCJuYW1lIjoibWlhIiwiaWF0IjoxNjIyMTM0NDA1fQ.s9O8Gq2KXrjrFSdSiIQlORFPxRyUGfuWxg-_9im8dX8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzM1ODYxM30.GL_L_YMLqmajMb-H4OLRk14u3ilV0TibBFM0g8VBfyg",
 									"type": "string"
 								}
 							]
@@ -400,12 +394,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/board/taskList",
+							"raw": "http://localhost:3010/api/board/taskList",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"board",
@@ -423,7 +417,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFmY2IyYmQ2OWQ1MDA1YTBiN2MwNDkiLCJuYW1lIjoibWlhIiwiaWF0IjoxNjIyMTM0NDA1fQ.s9O8Gq2KXrjrFSdSiIQlORFPxRyUGfuWxg-_9im8dX8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzM1ODYxM30.GL_L_YMLqmajMb-H4OLRk14u3ilV0TibBFM0g8VBfyg",
 									"type": "string"
 								}
 							]
@@ -432,7 +426,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"_id\": \"60b0f9e8c4db342668aaf0bb\",\r\n    \"name\": \"diseñar layout\",\r\n    \"status\": \"done\",\r\n    \"description\": \"frontend\"\r\n}",
+							"raw": "{\r\n    \"_id\": \"60c27f57e5062728f835a0be\",\r\n    \"name\": \"crear colecciones\",\r\n    \"description\": \"BD\",\r\n    \"status\": \"done\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -440,12 +434,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/board/updateTask",
+							"raw": "http://localhost:3010/api/board/updateTask",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"board",
@@ -463,7 +457,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGFmY2IyYmQ2OWQ1MDA1YTBiN2MwNDkiLCJuYW1lIjoibWlhIiwiaWF0IjoxNjIyMTM0NDA1fQ.s9O8Gq2KXrjrFSdSiIQlORFPxRyUGfuWxg-_9im8dX8",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzM1ODYxM30.GL_L_YMLqmajMb-H4OLRk14u3ilV0TibBFM0g8VBfyg",
 									"type": "string"
 								}
 							]
@@ -471,16 +465,17 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/api/board/60b0f5615858d117ac427c28",
+							"raw": "http://localhost:3010/api/board/deleteTask/60c27f57e5062728f835a0be",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"board",
-								"60b0f5615858d117ac427c28"
+								"deleteTask",
+								"60c27f57e5062728f835a0be"
 							]
 						}
 					},
@@ -492,6 +487,66 @@
 			"name": "Admin",
 			"item": [
 				{
+					"name": "Register user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Master Admin\",\r\n    \"email\": \"master@mail.com\",\r\n    \"password\": \"1234\" \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/user/userRegistration",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"user",
+								"userRegistration"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login user",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"master@mail.com\",\r\n    \"password\": \"1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3010/api/auth/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3010",
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create admin",
 					"request": {
 						"auth": {
@@ -499,7 +554,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGJhZjdmY2RkNDgyNjNhNjg1OGVhOTAiLCJuYW1lIjoiSnVhbiIsImlhdCI6MTYyMzAyNjAwOX0.NhsWEIZliam5KoACVYL4LognVtZS0TZkElIHtHxZnDw",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMyOWJkZmY3ODNhMTIxYjQxMGM1MTYiLCJuYW1lIjoiTWFzdGVyIEFkbWluIiwiZW1haWwiOiJtYXN0ZXJAbWFpbC5jb20iLCJyb2xlSWQiOiI2MGJhZjc0NmQ0NzNjYzFkNjg4MmQwNmMiLCJpYXQiOjE2MjMzNjc0NDV9.shbA2ffLSPwbJXQpwyN3jtBGYUVyipKgERuInRgi8lE",
 									"type": "string"
 								}
 							]
@@ -516,12 +571,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/adminRegistration",
+							"raw": "http://localhost:3010/api/user/adminRegistration",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -534,6 +589,16 @@
 				{
 					"name": "Update user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMyOWJkZmY3ODNhMTIxYjQxMGM1MTYiLCJuYW1lIjoiTWFzdGVyIEFkbWluIiwiZW1haWwiOiJtYXN0ZXJAbWFpbC5jb20iLCJyb2xlSWQiOiI2MGJhZjc0NmQ0NzNjYzFkNjg4MmQwNmMiLCJpYXQiOjE2MjMzNjc0NDV9.shbA2ffLSPwbJXQpwyN3jtBGYUVyipKgERuInRgi8lE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -546,12 +611,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/userUpdate/",
+							"raw": "http://localhost:3010/api/user/userUpdate/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -565,6 +630,16 @@
 				{
 					"name": "Delete user",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGMyOWJkZmY3ODNhMTIxYjQxMGM1MTYiLCJuYW1lIjoiTWFzdGVyIEFkbWluIiwiZW1haWwiOiJtYXN0ZXJAbWFpbC5jb20iLCJyb2xlSWQiOiI2MGJhZjc0NmQ0NzNjYzFkNjg4MmQwNmMiLCJpYXQiOjE2MjMzNjc0NDV9.shbA2ffLSPwbJXQpwyN3jtBGYUVyipKgERuInRgi8lE",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PUT",
 						"header": [],
 						"body": {
@@ -577,12 +652,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/deleteUser",
+							"raw": "http://localhost:3010/api/user/deleteUser",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",
@@ -607,12 +682,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/api/user/deleteUser/60baf867dd48263a6858ea91",
+							"raw": "http://localhost:3010/api/user/deleteUser/60baf867dd48263a6858ea91",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "3010",
 							"path": [
 								"api",
 								"user",

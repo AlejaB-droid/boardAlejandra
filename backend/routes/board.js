@@ -13,10 +13,13 @@ const Upload = require("../middleware/file");
 const Board = require("../models/board");
 
 
-router.post("/newTask", mult, Upload, UserAuth, Auth, async(req, res) => {
-    if(!req.body.name || !req.body.description){return res. status(400).send("Please fill all the blanks")}
+router.post("/newTask", mult, Upload, Auth, UserAuth, async(req, res) => {
+    if(!req.body.name || !req.body.description){
+        return res. status(400).send("Please fill all the blanks");
+    };
+
     let img = "";
-    if(req.files !== undefines && req.files.image.type){
+    if(req.files !== undefined && req.files.image.type){
         const url = req.protocol + "://" + req.get("host") + "/";
         let serverImage = "./uploads/" + moment().unix() + path.extname(req.files.image.path);
         fs.createReadStream(req.files.image.path).pipe(fs.createWriteStream(serverImage));
@@ -40,23 +43,11 @@ router.post("/newTask", mult, Upload, UserAuth, Auth, async(req, res) => {
     
 });
 
-// router.post("/newTask", Auth, async(req, res) => {
-//     const user = await validate(req);
-//     const board = new Board({
-//         userId: user._id,
-//         name: req.body.name,
-//         description: req.body.description,
-//         status: "to-do"
-//     });
-//     const result = await board.save();
-//     return res.status(200).send({result});
-// });
-
 router.get("/taskList", Auth, UserAuth, async(req, res) => {
-    const id = mongoose.Types.ObjectId.isValid(req.user._id);
-    if(!id) {return res.status(400).send("Invalid id")};
+    const validId = mongoose.Types.ObjectId.isValid(req.user._id);
+    if(!validId) {return res.status(400).send("Invalid id")};
 
-    const board = await Board.find({userId: user._id});
+    const board = await Board.find({userId: req.user._id});
     if(!board) {
         return res.status(400).send("There are no tasks to delete");
     }else{
@@ -74,7 +65,7 @@ router.put("/updateTask", Auth, UserAuth, async(req, res) => {
     if(!id){return rex.status(400).send("Invalid id")};
 
     const board = await Board.findByIdAndUpdate(req.body._id,{
-        userId: user._id,
+        userId: req.user._id,
         name: req.body.name,
         status: req.body.status,
         description: req.body.description
