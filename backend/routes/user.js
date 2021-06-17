@@ -35,8 +35,8 @@ router.post("/userRegistration", async (req, res) => {
 
   const result = await user.save();
   if (result) {
-    const jwt = user.generateJWT();
-    res.status(200).send({ jwt });
+    const jwtTk = user.generateJWT();
+    res.status(200).send({ jwtTk });
   } else {
     return res.status(200).send("Couldn't register user");
   }

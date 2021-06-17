@@ -13,7 +13,7 @@ router.post("/login", async (req, res) => {
     return res.status(400).send("Incorrect login info");
   try {
     const jwt = user.generateJWT();
-    return res.status(200).send({ jwt });
+    return res.status(200).send({ jwtTk });
   } catch (error) {
     return res.status(400).send("Login error");
   }

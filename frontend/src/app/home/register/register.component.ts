@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  registerUser(){
+  userRegistration(){
     if (
       !this.registerData.name ||
       !this.registerData.email ||
@@ -31,11 +31,11 @@ export class RegisterComponent implements OnInit {
       this.closeAlert();
       this.registerData = {};
     } else {
-      this.auth.registerUser(this.registerData).subscribe(
-        (res) => {
+      this.auth.userRegistration(this.registerData).subscribe(
+        (res: any) => {
           console.log(res);
-          this.successMessage = "Register user: successful";
-          this.closeAlert();
+          localStorage.setItem('token', res.jwtTk);
+          this.router.navigate(['/saveTask']);
           this.registerData={};
         },
         (err) => {
