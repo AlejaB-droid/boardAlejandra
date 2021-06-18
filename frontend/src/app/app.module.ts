@@ -14,13 +14,13 @@ import { ListTaskComponent } from './board/list-task/list-task.component';
 import { SaveTaskComponent } from './board/save-task/save-task.component';
 import { LoginComponent } from './home/login/login.component';
 import { RegisterComponent } from './home/register/register.component';
-import { AuthService } from "./services/auth.service";
-import { BoardService } from "./services/board.service";
-import { TokenInterceptorService } from "./services/token-interceptor.service";
-import { AuthGuard } from "./guard/auth.guard";
+import { AuthService } from './services/auth.service';
+import { BoardService } from './services/board.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
+import { AuthGuard } from './guard/auth.guard';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -29,7 +29,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -44,7 +44,7 @@ import { HttpClientModule } from "@angular/common/http";
     ListTaskComponent,
     SaveTaskComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,9 +59,18 @@ import { HttpClientModule } from "@angular/common/http";
     MatExpansionModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
-  providers: [AuthService, BoardService, AuthGuard, TokenInterceptorService],
-  bootstrap: [AppComponent]
+  providers: [
+    AuthService,
+    BoardService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

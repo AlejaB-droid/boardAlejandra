@@ -14,14 +14,14 @@ export class LoginComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router) {
     this.loginData = {};
     this.errorMessage = '';
-   }
+  }
 
   ngOnInit(): void {}
 
   login(){
     if (!this.loginData.email || !this.loginData.password) {
       console.log('Failed process: Incomplete data');
-      this.errorMessage = 'Failes process: Incomplete data';
+      this.errorMessage = 'Failed process: Incomplete data';
       this.closeAlert();
       this.loginData = {};
     } else {

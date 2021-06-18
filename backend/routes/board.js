@@ -13,25 +13,25 @@ const Upload = require("../middleware/file");
 const Board = require("../models/board");
 
 
-router.post("/newTask", mult, Upload, Auth, UserAuth, async(req, res) => {
+router.post("/newTask", Auth, UserAuth, async(req, res) => {
     if(!req.body.name || !req.body.description){
         return res. status(400).send("Please fill all the blanks");
     };
 
-    let img = "";
-    if(req.files !== undefined && req.files.image.type){
-        const url = req.protocol + "://" + req.get("host") + "/";
-        let serverImage = "./uploads/" + moment().unix() + path.extname(req.files.image.path);
-        fs.createReadStream(req.files.image.path).pipe(fs.createWriteStream(serverImage));
-        img = url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
-    }
+    // let img = "";
+    // if(req.files !== undefined && req.files.image.type){
+    //     const url = req.protocol + "://" + req.get("host") + "/";
+    //     let serverImage = "./uploads/" + moment().unix() + path.extname(req.files.image.path);
+    //     fs.createReadStream(req.files.image.path).pipe(fs.createWriteStream(serverImage));
+    //     img = url + "uploads/" + moment().unix() + path.extname(req.files.image.path);
+    // }
 
     const board = new Board({
         userId: req.user._id,
         name: req.body.name,
         description: req.body.description,
         status: "to-do",
-        image: img
+        //image: img
     });
 
     const result = await board.save();

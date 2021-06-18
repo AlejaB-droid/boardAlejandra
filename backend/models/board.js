@@ -5,7 +5,7 @@ const boardSchema = new mongoose.Schema({
     name: String,
     description: String,
     status: String,
-    image: String,
+    imageUrl: String,
     date: { type: Date,default: Date.now}
 });
 

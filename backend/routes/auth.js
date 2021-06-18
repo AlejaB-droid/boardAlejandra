@@ -12,7 +12,7 @@ router.post("/login", async (req, res) => {
   if (!user.status || !hash)
     return res.status(400).send("Incorrect login info");
   try {
-    const jwt = user.generateJWT();
+    const jwtTk = user.generateJWT();
     return res.status(200).send({ jwtTk });
   } catch (error) {
     return res.status(400).send("Login error");
