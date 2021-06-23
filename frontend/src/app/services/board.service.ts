@@ -17,6 +17,14 @@ export class BoardService {
   }
 
   listTasks(){
-    return this.http.get(this.env + "board/taskList");
+    return this.http.get<any>(this.env + "board/taskList");
+  }
+
+  updateTask(board: any){
+    this.http.put<any>(this.env + 'board/updateTask', board);
+  }
+
+  deleteTask(board: any){
+    this.http.delete<any>(this.env + 'board/deleteTask' + board._id);
   }
 }

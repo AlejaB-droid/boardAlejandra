@@ -12,7 +12,7 @@ const UserAuth = require("../middleware/user");
 const Upload = require("../middleware/file");
 const Board = require("../models/board");
 
-
+//mult, Upload, Auth, UserAuth,
 router.post("/newTask", Auth, UserAuth, async(req, res) => {
     if(!req.body.name || !req.body.description){
         return res. status(400).send("Please fill all the blanks");
