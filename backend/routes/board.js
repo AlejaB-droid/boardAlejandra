@@ -81,7 +81,7 @@ router.delete("/deleteTask/:_id", Auth, UserAuth, async(req, res) => {
     
     const board = await Board.findByIdAndDelete(req.params._id);
     if (!board) return res.status(401).send("The task does not exist");
-    return res.status(200).send("Task deleted");
+    return res.status(200).send( {message: "Task deleted"});
 });
 
 

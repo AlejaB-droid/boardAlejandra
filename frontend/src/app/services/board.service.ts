@@ -21,10 +21,10 @@ export class BoardService {
   }
 
   updateTask(board: any){
-    this.http.put<any>(this.env + 'board/updateTask', board);
+    return this.http.put<any>(this.env + 'board/updateTask', board);
   }
 
   deleteTask(board: any){
-    this.http.delete<any>(this.env + 'board/deleteTask' + board._id);
+    return this.http.delete<any>(this.env + 'board/deleteTask/' + board._id);
   }
 }

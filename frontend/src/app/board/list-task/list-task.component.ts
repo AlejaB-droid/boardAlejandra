@@ -32,9 +32,38 @@ export class ListTaskComponent implements OnInit {
     );
   }
 
-  updateTask(task: any, status: String) {}
+  updateTask(task: any, status: String) {
+    const tempStatus = task.status;
+    task.status = status;
+    this.board.updateTask(task).subscribe(
+      (res) => {
+        task.status = status;
+      },
+      (err) => {
+        task.status = tempStatus;
+        this.errorMessage = err.error;
+        this.closeAlert();
+      }
+    )
+  }
 
-  deleteTask(task: any) {}
+  deleteTask(task: any) {
+    this.board.deleteTask(task).subscribe(
+      (res) => {
+        const index = this.taskData.indexOf(task)
+        if (index > -1) {
+          this.taskData.splice(index, 1);
+          this.successMessage = 'task deleted';
+          this.closeAlert();
+        }
+      },
+      (err) => {
+        this.errorMessage = err.error;
+        this.closeAlert();
+        
+      }
+    )
+  }
 
   closeAlert() {
     setTimeout(() => {
