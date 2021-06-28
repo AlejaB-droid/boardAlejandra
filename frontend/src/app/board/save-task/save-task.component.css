@@ -28,28 +28,13 @@ mat-card-title{
     background-color: #695acd63;
 }
 
-.file .uploadImgBtn{
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    z-index: -1;
-    }
 
 .uploadImgBtn{
-    display: block;
-    position: relative;
-    width: 200px;
-    height: 50px;
-    border-radius: 25px;
-    background: linear-gradient(40deg, #ff6ec4, #7873f5);
-    box-shadow: 0 4px 7px rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform .2s ease-out;
+        color: #fff;
+        background-color: #106BA0;
+        display: inline-block;
+        border-radius: 25px;
+        cursor: pointer;
+        padding: 10px;
+        text-align: center;
 }
