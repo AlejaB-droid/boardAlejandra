@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class SaveTaskComponent implements OnInit {
   public taskData: any;
   public errorMessage: String;
+  public selectedFile: any;
 
   constructor(private boardService: BoardService, private router: Router) {
     this.taskData = {};
@@ -19,13 +20,22 @@ export class SaveTaskComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  uploadImg(event: any){
+    console.log(event);
+    this.selectedFile = <File>event.target.files[0];
+  }
+
   newTask(){
     if (!this.taskData.name || !this.taskData.description) {
       console.log('Please fill all the fields');
       this.errorMessage = 'Please fill all the fields';
       this.closeAlert();
     } else {
-      this.boardService.newTask(this.taskData).subscribe(
+      const data = new FormData();
+      data.append('image', this.selectedFile, this.selectedFile.name);
+      data.append('name', this.taskData.name);
+      data.append('description', this.taskData.description);
+      this.boardService.newTask(data).subscribe(
         (res: any) => {
           console.log(res);
           this.taskData = {};
