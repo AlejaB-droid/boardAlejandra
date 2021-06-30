@@ -9,7 +9,7 @@ const admin = async (req, res, next) => {
   if (role.name === "admin") {
     next();
   } else {
-    return res.status(400).sens("Unauthorized user");
+    return res.status(400).send("Unauthorized user");
   }
 };
 
